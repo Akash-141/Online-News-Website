@@ -1,0 +1,330 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-text-color: #1a1a1a;
+    --secondary-text-color: #6b7280;
+    --accent-color: #2563eb;
+    --accent-color-dark: #1e40af;
+    --background-color: #f9fafb;
+    --card-background: #ffffff;
+    --border-color: #e5e7eb;
+    --hover-background: #f3f4f6;
+    --nav-background: #ffffff;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: var(--primary-text-color);
+    background-color: var(--background-color);
+    line-height: 1.6;
+}
+
+p {
+    font-family: 'Inter', sans-serif;
+    color: var(--secondary-text-color);
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+}
+
+.container {
+    max-width: 1200px;
+    margin-inline: auto;
+    padding-inline: 20px;
+}
+
+nav {
+    background-color: var(--nav-background);
+    box-shadow: var(--shadow-sm);
+    border-bottom: 1px solid var(--border-color);
+    position: fixed;
+    top: 0;
+    z-index: 99;
+    left: 0;
+    right: 0;
+}
+
+.main-nav {
+    justify-content: space-between;
+    padding-block: 16px;
+    gap: 20px;
+}
+
+.company-logo {
+    transition: opacity 0.2s;
+}
+
+.company-logo:hover {
+    opacity: 0.8;
+}
+
+.logo-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    letter-spacing: -0.5px;
+}
+
+.nav-links ul {
+    gap: 8px;
+}
+
+.nav-item {
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+}
+
+.hover-link {
+    cursor: pointer;
+}
+
+.hover-link:hover {
+    background-color: var(--hover-background);
+    color: var(--accent-color);
+}
+
+.nav-item.active {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.nav-item.active:hover {
+    background-color: var(--accent-color-dark);
+}
+
+.search-bar {
+    gap: 8px;
+    background-color: var(--background-color);
+    padding: 6px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.news-input {
+    width: 220px;
+    height: 38px;
+    padding-inline: 14px;
+    border-radius: 6px;
+    border: none;
+    background-color: transparent;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+}
+
+.news-input::placeholder {
+    color: var(--secondary-text-color);
+}
+
+.search-button {
+    background-color: var(--accent-color);
+    color: white;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: background-color 0.2s;
+}
+
+.search-button:hover {
+    background-color: var(--accent-color-dark);
+}
+
+.search-button:active {
+    transform: scale(0.98);
+}
+
+main {
+    padding-block: 40px;
+    margin-top: 80px;
+    min-height: calc(100vh - 80px);
+}
+
+.cards-container {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 24px;
+    align-items: stretch;
+}
+
+.card {
+    width: 360px;
+    background-color: var(--card-background);
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--accent-color);
+}
+
+.card-header {
+    overflow: hidden;
+    height: 200px;
+    background-color: var(--hover-background);
+}
+
+.card-header img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.card:hover .card-header img {
+    transform: scale(1.05);
+}
+
+.card-content {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-content h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 12px;
+    color: var(--primary-text-color);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.news-source {
+    font-size: 0.8rem;
+    color: var(--secondary-text-color);
+    margin-bottom: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.news-desc {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex-grow: 1;
+}
+
+
+/* Loading and error states */
+
+.loading,
+.error,
+.no-results {
+    text-align: center;
+    padding: 60px 20px;
+    font-size: 1.1rem;
+    color: var(--secondary-text-color);
+    width: 100%;
+}
+
+.loading {
+    color: var(--accent-color);
+    font-weight: 500;
+}
+
+.error {
+    color: #dc2626;
+    font-weight: 500;
+}
+
+.no-results {
+    color: var(--secondary-text-color);
+}
+
+
+/* Responsive Design */
+
+@media (max-width: 1024px) {
+    .container {
+        padding-inline: 16px;
+    }
+    .cards-container {
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-nav {
+        flex-direction: column;
+        padding-block: 12px;
+        gap: 16px;
+    }
+    .nav-links ul {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .search-bar {
+        width: 100%;
+        max-width: 400px;
+    }
+    .news-input {
+        flex: 1;
+    }
+    .card {
+        width: 100%;
+        max-width: 400px;
+    }
+    main {
+        margin-top: 180px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo-text {
+        font-size: 1.25rem;
+    }
+    .nav-item {
+        padding: 6px 12px;
+        font-size: 0.85rem;
+    }
+    .search-button {
+        padding: 8px 16px;
+    }
+    .card-content h3 {
+        font-size: 1rem;
+    }
+}
