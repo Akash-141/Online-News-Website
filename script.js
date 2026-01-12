@@ -1,286 +1,540 @@
-// News Portal with sample data (works without API)
-// In production, replace with your own valid API key
+// Professional News Portal - Clean and Error-Free Code
 
-window.addEventListener("load", () => fetchNews("world"));
-
-function reload() {
-    window.location.reload();
-}
-
-// Sample news data
-const sampleNews = {
+// News Database
+const newsDatabase = {
     world: [{
-            title: "Global Climate Summit Reaches Landmark Agreement on Emissions",
-            description: "World leaders gather to commit to significant reductions in carbon emissions by 2030, marking a historic moment in climate action.",
-            image_url: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=200&fit=crop",
+            id: 1,
+            title: "Global Climate Summit Reaches Historic Agreement on Carbon Emissions",
+            description: "World leaders from over 190 countries have committed to reducing carbon emissions by 50% by 2030, marking a significant milestone in the fight against climate change.",
+            image: "https://images.unsplash.com/photo-1569163139394-de4798aa62b6?w=800&h=500&fit=crop",
+            category: "World",
             source: "Global News Network",
-            pubDate: "2026-01-08T10:30:00Z",
-            link: "https://example.com/climate-summit"
+            date: "2026-01-11",
+            link: "#"
         },
         {
-            title: "New Archaeological Discovery in Egypt Reveals Ancient Civilization Secrets",
-            description: "Archaeologists uncover a previously unknown chamber in the Great Pyramid, containing artifacts that could rewrite history.",
-            image_url: "https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?w=400&h=200&fit=crop",
-            source: "World History Today",
-            pubDate: "2026-01-07T14:20:00Z",
-            link: "https://example.com/egypt-discovery"
+            id: 2,
+            title: "International Space Station Welcomes First Mars-Bound Crew",
+            description: "Six astronauts from various countries have arrived at the ISS to begin their final preparations for humanity's first crewed mission to Mars, scheduled for 2027.",
+            image: "https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?w=800&h=500&fit=crop",
+            category: "World",
+            source: "Space Today",
+            date: "2026-01-10",
+            link: "#"
         },
         {
-            title: "International Space Station Welcomes New Crew for Six-Month Mission",
-            description: "A multinational crew of astronauts successfully docks at the ISS, beginning experiments in microgravity research.",
-            image_url: "https://images.unsplash.com/photo-1446776877081-d282a0f896e2?w=400&h=200&fit=crop",
-            source: "Space News",
-            pubDate: "2026-01-07T09:15:00Z",
-            link: "https://example.com/iss-mission"
+            id: 3,
+            title: "New Archaeological Discovery Rewrites Ancient History",
+            description: "Archaeologists in Egypt have uncovered a previously unknown pyramid complex that predates the Great Pyramid, potentially revolutionizing our understanding of ancient civilizations.",
+            image: "https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?w=800&h=500&fit=crop",
+            category: "World",
+            source: "History Channel",
+            date: "2026-01-09",
+            link: "#"
         },
         {
-            title: "Global Economic Forum Discusses Sustainable Development Goals",
-            description: "Economic leaders from around the world convene to address challenges and opportunities in sustainable development.",
-            image_url: "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=400&h=200&fit=crop",
+            id: 4,
+            title: "Global Economy Shows Strong Recovery Signs",
+            description: "International Monetary Fund reports unprecedented economic growth across major economies, signaling a robust recovery from recent challenges.",
+            image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&h=500&fit=crop",
+            category: "World",
             source: "Economic Times",
-            pubDate: "2026-01-06T16:00:00Z",
-            link: "https://example.com/economic-forum"
+            date: "2026-01-08",
+            link: "#"
         },
         {
-            title: "Breakthrough in Renewable Energy: New Solar Panel Technology Announced",
-            description: "Scientists develop revolutionary solar panels with 50% higher efficiency, promising to transform the energy sector.",
-            image_url: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=400&h=200&fit=crop",
-            source: "Tech Innovation",
-            pubDate: "2026-01-06T11:30:00Z",
-            link: "https://example.com/solar-breakthrough"
+            id: 5,
+            title: "UN Launches Major Initiative for Global Education",
+            description: "United Nations announces a $50 billion program to provide quality education access to children in developing nations over the next decade.",
+            image: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=800&h=500&fit=crop",
+            category: "World",
+            source: "UN News",
+            date: "2026-01-07",
+            link: "#"
         },
         {
-            title: "World Health Organization Launches New Global Health Initiative",
-            description: "WHO announces comprehensive program to improve healthcare access in developing nations.",
-            image_url: "https://images.unsplash.com/photo-1584515933487-779824d29309?w=400&h=200&fit=crop",
-            source: "Health Today",
-            pubDate: "2026-01-05T13:45:00Z",
-            link: "https://example.com/who-initiative"
+            id: 6,
+            title: "Breakthrough in Ocean Plastic Cleanup Technology",
+            description: "Scientists unveil revolutionary method that can remove 90% of ocean microplastics, offering hope for marine ecosystem restoration.",
+            image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&h=500&fit=crop",
+            category: "World",
+            source: "Environmental Weekly",
+            date: "2026-01-06",
+            link: "#"
         }
     ],
     technology: [{
-            title: "AI Breakthrough: New Model Achieves Human-Level Understanding",
-            description: "Researchers unveil advanced artificial intelligence system that demonstrates unprecedented comprehension abilities.",
-            image_url: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=200&fit=crop",
-            source: "Tech Daily",
-            pubDate: "2026-01-08T08:00:00Z",
-            link: "https://example.com/ai-breakthrough"
+            id: 7,
+            title: "AI System Achieves Human-Level Understanding in Complex Tasks",
+            description: "New artificial intelligence model demonstrates unprecedented comprehension abilities, passing rigorous tests in reasoning, creativity, and problem-solving.",
+            image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=500&fit=crop",
+            category: "Technology",
+            source: "Tech Innovators",
+            date: "2026-01-11",
+            link: "#"
         },
         {
-            title: "Quantum Computing Reaches New Milestone in Processing Power",
-            description: "Major tech company announces quantum processor capable of solving complex problems in seconds.",
-            image_url: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=400&h=200&fit=crop",
-            source: "Innovation Weekly",
-            pubDate: "2026-01-07T12:30:00Z",
-            link: "https://example.com/quantum-computing"
+            id: 8,
+            title: "Quantum Computing Breakthrough Promises Revolutionary Changes",
+            description: "Scientists achieve quantum supremacy with a 1000-qubit processor, capable of solving problems in seconds that would take classical computers millennia.",
+            image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&h=500&fit=crop",
+            category: "Technology",
+            source: "Quantum Today",
+            date: "2026-01-10",
+            link: "#"
         },
         {
-            title: "Revolutionary Battery Technology Promises Week-Long Smartphone Charge",
-            description: "New solid-state battery technology could eliminate daily charging, extending battery life dramatically.",
-            image_url: "https://images.unsplash.com/photo-1591337676887-a217a6970a8a?w=400&h=200&fit=crop",
-            source: "Mobile Tech News",
-            pubDate: "2026-01-06T15:20:00Z",
-            link: "https://example.com/battery-tech"
+            id: 9,
+            title: "Revolutionary Battery Technology Extends EV Range to 1000 Miles",
+            description: "New solid-state battery technology promises to triple electric vehicle range while reducing charging time to just 10 minutes.",
+            image: "https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=800&h=500&fit=crop",
+            category: "Technology",
+            source: "EV World",
+            date: "2026-01-09",
+            link: "#"
         },
         {
-            title: "5G Networks Complete Global Rollout Ahead of Schedule",
-            description: "Telecommunications companies achieve worldwide 5G coverage, enabling new innovations in connectivity.",
-            image_url: "https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?w=400&h=200&fit=crop",
-            source: "Network World",
-            pubDate: "2026-01-06T10:00:00Z",
-            link: "https://example.com/5g-rollout"
+            id: 10,
+            title: "6G Networks Begin Global Rollout",
+            description: "Next-generation wireless technology promises speeds 100 times faster than 5G, enabling new innovations in IoT and autonomous systems.",
+            image: "https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?w=800&h=500&fit=crop",
+            category: "Technology",
+            source: "Network News",
+            date: "2026-01-08",
+            link: "#"
         }
     ],
     business: [{
-            title: "Stock Markets Hit Record Highs Amid Economic Recovery",
-            description: "Major global indices reach unprecedented levels as investors show confidence in economic growth.",
-            image_url: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=400&h=200&fit=crop",
-            source: "Financial Times",
-            pubDate: "2026-01-08T07:30:00Z",
-            link: "https://example.com/stock-markets"
-        },
-        {
-            title: "Major Tech Companies Announce Merger Creating Industry Giant",
-            description: "Two leading technology firms agree to merge, creating one of the world's most valuable companies.",
-            image_url: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=200&fit=crop",
+            id: 11,
+            title: "Tech Giants Announce Historic Merger",
+            description: "Two of the world's largest technology companies agree to merge in a deal worth $500 billion, creating the most valuable corporation in history.",
+            image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=500&fit=crop",
+            category: "Business",
             source: "Business Insider",
-            pubDate: "2026-01-07T11:00:00Z",
-            link: "https://example.com/tech-merger"
+            date: "2026-01-11",
+            link: "#"
         },
         {
-            title: "Green Energy Investments Surpass Fossil Fuels for First Time",
-            description: "Renewable energy sector attracts more investment capital than traditional energy sources.",
-            image_url: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=400&h=200&fit=crop",
+            id: 12,
+            title: "Green Energy Investments Reach Record $2 Trillion",
+            description: "Renewable energy sector attracts unprecedented investment as companies worldwide commit to carbon neutrality goals.",
+            image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&h=500&fit=crop",
+            category: "Business",
             source: "Energy Finance",
-            pubDate: "2026-01-06T14:15:00Z",
-            link: "https://example.com/green-investment"
+            date: "2026-01-10",
+            link: "#"
         },
         {
-            title: "E-commerce Sales Break Records During Holiday Season",
-            description: "Online retailers report unprecedented sales figures, highlighting shift in consumer behavior.",
-            image_url: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=200&fit=crop",
+            id: 13,
+            title: "Stock Markets Hit All-Time Highs Globally",
+            description: "Major indices worldwide reach unprecedented levels as investor confidence soars amid strong economic indicators.",
+            image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&h=500&fit=crop",
+            category: "Business",
+            source: "Financial Times",
+            date: "2026-01-09",
+            link: "#"
+        },
+        {
+            id: 14,
+            title: "E-Commerce Revolution: Online Sales Surpass Traditional Retail",
+            description: "For the first time in history, online shopping accounts for more than 50% of total retail sales globally.",
+            image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=500&fit=crop",
+            category: "Business",
             source: "Retail Weekly",
-            pubDate: "2026-01-05T16:30:00Z",
-            link: "https://example.com/ecommerce-records"
+            date: "2026-01-08",
+            link: "#"
         }
     ],
     sports: [{
-            title: "Underdog Team Wins Championship in Stunning Upset",
-            description: "Against all odds, the underdog team clinches the championship title in a thrilling final match.",
-            image_url: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=400&h=200&fit=crop",
+            id: 15,
+            title: "Underdog Team Wins Championship in Historic Upset",
+            description: "Against all odds, the underdog team clinches the championship title in a thrilling final match that will be remembered for generations.",
+            image: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&h=500&fit=crop",
+            category: "Sports",
             source: "Sports Network",
-            pubDate: "2026-01-08T19:00:00Z",
-            link: "https://example.com/championship-upset"
+            date: "2026-01-11",
+            link: "#"
         },
         {
-            title: "Olympic Athlete Breaks World Record in Historic Performance",
-            description: "Track and field star shatters long-standing world record, making history in the sport.",
-            image_url: "https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=400&h=200&fit=crop",
-            source: "Athletic News",
-            pubDate: "2026-01-07T17:45:00Z",
-            link: "https://example.com/world-record"
+            id: 16,
+            title: "Olympic Athlete Breaks World Record by Unprecedented Margin",
+            description: "Track and field star shatters 20-year-old world record, setting a new mark that experts believe will stand for decades.",
+            image: "https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=800&h=500&fit=crop",
+            category: "Sports",
+            source: "Olympic News",
+            date: "2026-01-10",
+            link: "#"
         },
         {
-            title: "Major League Announces Expansion to New International Markets",
-            description: "Professional sports league reveals plans to expand operations to three new countries.",
-            image_url: "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=400&h=200&fit=crop",
+            id: 17,
+            title: "Major League Announces Expansion to 10 New Cities",
+            description: "Professional sports league reveals ambitious expansion plans, bringing top-tier competition to new markets across the globe.",
+            image: "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800&h=500&fit=crop",
+            category: "Sports",
             source: "League Insider",
-            pubDate: "2026-01-06T20:15:00Z",
-            link: "https://example.com/league-expansion"
+            date: "2026-01-09",
+            link: "#"
         },
         {
-            title: "Rising Star Signs Record-Breaking Contract with Top Team",
-            description: "Young athlete secures historic deal, becoming the highest-paid player in the sport.",
-            image_url: "https://images.unsplash.com/photo-1517466787929-bc90951d0974?w=400&h=200&fit=crop",
+            id: 18,
+            title: "Rising Star Signs Record-Breaking $500 Million Contract",
+            description: "Young phenom secures the largest contract in sports history, becoming the highest-paid athlete across all major leagues.",
+            image: "https://images.unsplash.com/photo-1517466787929-bc90951d0974?w=800&h=500&fit=crop",
+            category: "Sports",
             source: "Sports Daily",
-            pubDate: "2026-01-05T18:30:00Z",
-            link: "https://example.com/contract-record"
+            date: "2026-01-08",
+            link: "#"
         }
     ],
     health: [{
-            title: "New Cancer Treatment Shows Promising Results in Clinical Trials",
-            description: "Innovative therapy demonstrates remarkable success rate in treating various forms of cancer.",
-            image_url: "https://images.unsplash.com/photo-1579154204601-01588f351e67?w=400&h=200&fit=crop",
+            id: 19,
+            title: "Revolutionary Cancer Treatment Shows 95% Success Rate",
+            description: "New immunotherapy breakthrough demonstrates remarkable effectiveness in treating various forms of cancer with minimal side effects.",
+            image: "https://images.unsplash.com/photo-1579154204601-01588f351e67?w=800&h=500&fit=crop",
+            category: "Health",
             source: "Medical Journal",
-            pubDate: "2026-01-08T09:30:00Z",
-            link: "https://example.com/cancer-treatment"
+            date: "2026-01-11",
+            link: "#"
         },
         {
-            title: "Mental Health Awareness Campaign Launches Globally",
-            description: "International organizations unite to promote mental health awareness and reduce stigma.",
-            image_url: "https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=400&h=200&fit=crop",
-            source: "Health Today",
-            pubDate: "2026-01-07T13:00:00Z",
-            link: "https://example.com/mental-health"
-        },
-        {
-            title: "Revolutionary Gene Therapy Approved for Rare Disease Treatment",
-            description: "Medical authorities approve groundbreaking gene therapy offering hope to patients with rare conditions.",
-            image_url: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=400&h=200&fit=crop",
+            id: 20,
+            title: "Gene Therapy Approved for Rare Diseases",
+            description: "Medical authorities approve groundbreaking gene therapy treatments offering hope to millions of patients with previously incurable conditions.",
+            image: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=800&h=500&fit=crop",
+            category: "Health",
             source: "Biotech News",
-            pubDate: "2026-01-06T12:45:00Z",
-            link: "https://example.com/gene-therapy"
+            date: "2026-01-10",
+            link: "#"
         },
         {
-            title: "Study Reveals Benefits of Mediterranean Diet on Longevity",
-            description: "Large-scale research confirms Mediterranean diet's significant impact on lifespan and health.",
-            image_url: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=400&h=200&fit=crop",
+            id: 21,
+            title: "Mental Health Initiative Reaches 100 Million People",
+            description: "Global mental health awareness campaign successfully provides support and resources to communities worldwide.",
+            image: "https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=800&h=500&fit=crop",
+            category: "Health",
+            source: "Health Today",
+            date: "2026-01-09",
+            link: "#"
+        },
+        {
+            id: 22,
+            title: "Study Confirms Mediterranean Diet Benefits for Longevity",
+            description: "Largest-ever nutrition study validates Mediterranean diet's significant impact on lifespan and overall health outcomes.",
+            image: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&h=500&fit=crop",
+            category: "Health",
             source: "Nutrition Science",
-            pubDate: "2026-01-05T15:00:00Z",
-            link: "https://example.com/mediterranean-diet"
+            date: "2026-01-08",
+            link: "#"
+        }
+    ],
+    entertainment: [{
+            id: 23,
+            title: "Blockbuster Film Breaks All-Time Box Office Records",
+            description: "Highly anticipated movie surpasses $3 billion globally in its opening month, setting new standards for cinema success.",
+            image: "https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=800&h=500&fit=crop",
+            category: "Entertainment",
+            source: "Hollywood Reporter",
+            date: "2026-01-11",
+            link: "#"
+        },
+        {
+            id: 24,
+            title: "Music Festival Announces Star-Studded Lineup",
+            description: "Biggest music event of the year reveals incredible roster featuring top artists from around the world.",
+            image: "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=800&h=500&fit=crop",
+            category: "Entertainment",
+            source: "Music News",
+            date: "2026-01-10",
+            link: "#"
+        }
+    ],
+    science: [{
+            id: 25,
+            title: "Scientists Discover Potential for Life on Distant Exoplanet",
+            description: "Revolutionary telescope observations reveal biosignatures on planet 40 light-years away, suggesting possibility of extraterrestrial life.",
+            image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=500&fit=crop",
+            category: "Science",
+            source: "Space Science",
+            date: "2026-01-11",
+            link: "#"
+        },
+        {
+            id: 26,
+            title: "Fusion Energy Achieves Net Positive Output",
+            description: "Scientists successfully generate more energy from fusion reaction than input, marking historic milestone in clean energy pursuit.",
+            image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&h=500&fit=crop",
+            category: "Science",
+            source: "Science Today",
+            date: "2026-01-10",
+            link: "#"
         }
     ]
 };
 
-async function fetchNews(query) {
-    const cardsContainer = document.getElementById("cards-container");
-    cardsContainer.innerHTML = '<div class="loading">Loading news...</div>';
+// Global variables
+let currentCategory = 'world';
+let currentView = 'grid';
 
-    // Simulate API delay
-    await new Promise(resolve => setTimeout(resolve, 500));
+// Initialize the website
+document.addEventListener('DOMContentLoaded', function() {
+    updateDateTime();
+    setInterval(updateDateTime, 1000);
+    loadCategory('world');
+    setupEventListeners();
+});
 
-    try {
-        let articles = sampleNews[query.toLowerCase()] || sampleNews.world;
+// Update date and time
+function updateDateTime() {
+    const now = new Date();
+    const options = {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+    };
+    document.getElementById('datetime').textContent = now.toLocaleDateString('en-US', options);
+}
 
-        if (articles && articles.length > 0) {
-            bindData(articles);
-        } else {
-            cardsContainer.innerHTML = '<div class="no-results">No news found. Try a different category.</div>';
+// Setup event listeners
+function setupEventListeners() {
+    const searchInput = document.getElementById('searchInput');
+    searchInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            searchNews();
         }
-    } catch (error) {
-        console.error("Error loading news:", error);
-        cardsContainer.innerHTML = '<div class="error">Failed to load news. Please try again.</div>';
+    });
+}
+
+// Load category
+function loadCategory(category) {
+    currentCategory = category;
+
+    // Show featured section
+    document.getElementById('featuredSection').style.display = 'block';
+
+    // Update active nav link
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('active');
+        if (link.dataset.category === category) {
+            link.classList.add('active');
+        }
+    });
+
+    // Update category title
+    const categoryTitle = category.charAt(0).toUpperCase() + category.slice(1);
+    document.getElementById('categoryTitle').textContent = `${categoryTitle} News`;
+
+    // Show loading
+    showLoading(true);
+
+    // Simulate loading delay for better UX
+    setTimeout(() => {
+        displayNews(category);
+        displayFeatured(category);
+        displayTrending(category);
+        displayBreakingNews(category);
+        showLoading(false);
+    }, 500);
+}
+
+// Display featured article
+function displayFeatured(category) {
+    const articles = newsDatabase[category] || newsDatabase.world;
+    const featured = articles[0];
+
+    const featuredHTML = `
+        <div class="featured-image">
+            <img src="${featured.image}" alt="${featured.title}">
+        </div>
+        <div class="featured-content">
+            <span class="featured-category">${featured.category}</span>
+            <h2 class="featured-title">${featured.title}</h2>
+            <p class="featured-excerpt">${featured.description}</p>
+            <div class="featured-meta">
+                <span>${featured.source}</span>
+                <span>•</span>
+                <span>${formatDate(featured.date)}</span>
+            </div>
+        </div>
+    `;
+
+    document.getElementById('featuredArticle').innerHTML = featuredHTML;
+}
+
+// Display news grid
+function displayNews(category) {
+    const articles = newsDatabase[category] || newsDatabase.world;
+    const newsGrid = document.getElementById('newsGrid');
+
+    // Skip first article (it's featured)
+    const displayArticles = articles.slice(1);
+
+    const newsHTML = displayArticles.map(article => `
+        <article class="news-card" onclick="openArticle('${article.link}')">
+            <div class="news-image">
+                <img src="${article.image}" alt="${article.title}">
+                <span class="news-category">${article.category}</span>
+            </div>
+            <div class="news-content">
+                <h3 class="news-title">${article.title}</h3>
+                <p class="news-description">${article.description}</p>
+                <div class="news-meta">
+                    <span class="news-source">${article.source}</span>
+                    <span class="news-date">${formatDate(article.date)}</span>
+                </div>
+            </div>
+        </article>
+    `).join('');
+
+    newsGrid.innerHTML = newsHTML;
+}
+
+// Display trending news
+function displayTrending(category) {
+    const allArticles = [];
+    Object.keys(newsDatabase).forEach(cat => {
+        allArticles.push(...newsDatabase[cat]);
+    });
+
+    // Get random trending articles
+    const trending = allArticles.sort(() => 0.5 - Math.random()).slice(0, 5);
+
+    const trendingHTML = trending.map((article, index) => `
+        <div class="trending-item" onclick="openArticle('${article.link}')">
+            <div class="trending-number">${index + 1}</div>
+            <div class="trending-content">
+                <h4 class="trending-title">${article.title}</h4>
+                <div class="trending-meta">${article.source} • ${formatDate(article.date)}</div>
+            </div>
+        </div>
+    `).join('');
+
+    document.getElementById('trendingList').innerHTML = trendingHTML;
+}
+
+// Display breaking news
+function displayBreakingNews(category) {
+    const articles = newsDatabase[category] || newsDatabase.world;
+    const breakingText = articles.map(a => a.title).join(' • • • ');
+    document.getElementById('breakingNews').innerHTML = `<span>${breakingText} • • • ${breakingText}</span>`;
+}
+
+// Search functionality
+function searchNews() {
+    const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+
+    if (!searchTerm) {
+        loadCategory(currentCategory);
+        return;
+    }
+
+    // Search across all categories
+    const allArticles = [];
+    Object.keys(newsDatabase).forEach(category => {
+        newsDatabase[category].forEach(article => {
+            if (article.title.toLowerCase().includes(searchTerm) ||
+                article.description.toLowerCase().includes(searchTerm)) {
+                allArticles.push(article);
+            }
+        });
+    });
+
+    // Update title
+    document.getElementById('categoryTitle').textContent = `Search Results for "${searchTerm}"`;
+
+    // Hide featured section during search
+    document.getElementById('featuredSection').style.display = 'none';
+
+    if (allArticles.length === 0) {
+        document.getElementById('newsGrid').innerHTML = `
+            <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px;">
+                <h3 style="color: var(--text-light); font-size: 1.5rem;">No results found for "${searchTerm}"</h3>
+                <p style="color: var(--text-light); margin-top: 10px;">Try different keywords or browse our categories</p>
+            </div>
+        `;
+        return;
+    }
+
+    const newsHTML = allArticles.map(article => `
+        <article class="news-card" onclick="openArticle('${article.link}')">
+            <div class="news-image">
+                <img src="${article.image}" alt="${article.title}">
+                <span class="news-category">${article.category}</span>
+            </div>
+            <div class="news-content">
+                <h3 class="news-title">${article.title}</h3>
+                <p class="news-description">${article.description}</p>
+                <div class="news-meta">
+                    <span class="news-source">${article.source}</span>
+                    <span class="news-date">${formatDate(article.date)}</span>
+                </div>
+            </div>
+        </article>
+    `).join('');
+
+    document.getElementById('newsGrid').innerHTML = newsHTML;
+}
+
+// Set view (grid or list)
+function setView(view) {
+    currentView = view;
+    const newsGrid = document.getElementById('newsGrid');
+    const viewButtons = document.querySelectorAll('.view-btn');
+
+    viewButtons.forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.dataset.view === view) {
+            btn.classList.add('active');
+        }
+    });
+
+    if (view === 'list') {
+        newsGrid.classList.add('list-view');
+    } else {
+        newsGrid.classList.remove('list-view');
     }
 }
 
-function bindData(articles) {
-    const cardsContainer = document.getElementById("cards-container");
-    const templateNewsCard = document.getElementById("template-news-card");
+// Format date
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffTime = Math.abs(now - date);
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
 
-    cardsContainer.innerHTML = "";
+    if (diffDays === 0) return 'Today';
+    if (diffDays === 1) return 'Yesterday';
+    if (diffDays < 7) return `${diffDays} days ago`;
 
-    articles.forEach((article) => {
-        const cardClone = templateNewsCard.content.cloneNode(true);
-        fillDataInCard(cardClone, article);
-        cardsContainer.appendChild(cardClone);
-    });
+    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 }
 
-function fillDataInCard(cardClone, article) {
-    const newsImg = cardClone.querySelector('#news-img');
-    const newsTitle = cardClone.querySelector('#news-title');
-    const newsSource = cardClone.querySelector('#news-source');
-    const newsDesc = cardClone.querySelector('#news-desc');
+// Show/hide loading
+function showLoading(show) {
+    const spinner = document.getElementById('loadingSpinner');
+    const newsGrid = document.getElementById('newsGrid');
 
-    newsImg.src = article.image_url || 'https://via.placeholder.com/400x200/e0e0e0/666666?text=No+Image';
-    newsImg.onerror = () => {
-        newsImg.src = 'https://via.placeholder.com/400x200/e0e0e0/666666?text=No+Image';
-    };
-
-    newsTitle.innerHTML = article.title;
-    newsDesc.innerHTML = article.description || 'No description available';
-
-    const date = new Date(article.pubDate).toLocaleString("en-US", {
-        month: 'short',
-        day: 'numeric',
-        year: 'numeric'
-    });
-
-    const sourceName = article.source || 'News Source';
-    newsSource.innerHTML = `${sourceName} · ${date}`;
-
-    cardClone.firstElementChild.addEventListener('click', () => {
-        window.open(article.link, "_blank");
-    });
+    if (show) {
+        spinner.classList.add('active');
+        newsGrid.style.display = 'none';
+    } else {
+        spinner.classList.remove('active');
+        newsGrid.style.display = 'grid';
+    }
 }
 
-let curSelectedNav = null;
-
-function onNavItemClick(id) {
-    fetchNews(id);
-    const navItem = document.getElementById(id);
-    curSelectedNav ? .classList.remove('active');
-    curSelectedNav = navItem;
-    curSelectedNav.classList.add('active');
+// Open article (placeholder)
+function openArticle(link) {
+    console.log('Opening article:', link);
+    // In a real application, this would navigate to the article page
+    alert('Article functionality would open here. This is a demo.');
 }
 
-const searchButton = document.getElementById("search-button");
-const searchText = document.getElementById("search-text");
-
-searchButton.addEventListener("click", () => {
-    const query = searchText.value;
-    if (!query) return;
-    fetchNews(query);
-    curSelectedNav ? .classList.remove('active');
-    curSelectedNav = null;
-});
-
-searchText.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") {
-        const query = searchText.value;
-        if (!query) return;
-        fetchNews(query);
-        curSelectedNav ? .classList.remove('active');
-        curSelectedNav = null;
+// Prevent default link behavior
+document.addEventListener('click', function(e) {
+    if (e.target.tagName === 'A' && e.target.getAttribute('href') === '#') {
+        e.preventDefault();
     }
 });
