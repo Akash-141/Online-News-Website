@@ -4,58 +4,150 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NewsHub - Stay Informed</title>
+    <title>Global News Hub - Your Source for World News</title>
+    <link rel="icon" type="image/png" href="images/favicon.png">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <nav>
-        <div class="main-nav container flex">
-            <a href="#" onclick="reload()" class="company-logo">
-                <h1 class="logo-text">📰 NewsHub</h1>
-            </a>
-            <div class="nav-links">
-                <ul class="flex">
-                    <li class="hover-link nav-item" id="technology" onclick="onNavItemClick('technology')">Technology</li>
-                    <li class="hover-link nav-item" id="business" onclick="onNavItemClick('business')">Business</li>
-                    <li class="hover-link nav-item" id="sports" onclick="onNavItemClick('sports')">Sports</li>
-                    <li class="hover-link nav-item" id="health" onclick="onNavItemClick('health')">Health</li>
-                </ul>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+
+                <div class="logo">
+                    <a href="#" onclick="loadCategory('world'); return false;" class="logo-link">
+                        <img src="images/logo.png" alt="Global News Hub Logo" class="logo-image">
+                    </a>
+                    <div class="logo-text-container">
+                        <h1 class="logo-title">Global News Hub</h1>
+                        <p class="logo-subtitle">Truth • Integrity • Excellence</p>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="date-time" id="datetime"></div>
+                </div>
             </div>
-            <div class="search-bar flex">
-                <input type="text" class="news-input" id="search-text" placeholder="Search news...">
-                <button class="search-button" id="search-button">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <ul class="nav-menu">
+                <li><a href="#" class="nav-link active" data-category="world" onclick="loadCategory('world')">World</a></li>
+                <li><a href="#" class="nav-link" data-category="technology" onclick="loadCategory('technology')">Technology</a></li>
+                <li><a href="#" class="nav-link" data-category="business" onclick="loadCategory('business')">Business</a></li>
+                <li><a href="#" class="nav-link" data-category="sports" onclick="loadCategory('sports')">Sports</a></li>
+                <li><a href="#" class="nav-link" data-category="health" onclick="loadCategory('health')">Health</a></li>
+                <li><a href="#" class="nav-link" data-category="entertainment" onclick="loadCategory('entertainment')">Entertainment</a></li>
+                <li><a href="#" class="nav-link" data-category="science" onclick="loadCategory('science')">Science</a></li>
+            </ul>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search articles..." class="search-input">
+                <button onclick="searchNews()" class="search-btn" title="Search news">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                         <circle cx="11" cy="11" r="8"></circle>
                         <path d="m21 21-4.35-4.35"></path>
                     </svg>
-                    Search
                 </button>
             </div>
         </div>
     </nav>
 
-    <main>
-        <div class="cards-container container flex" id="cards-container">
+    <!-- Breaking News Ticker -->
+    <div class="breaking-news">
+        <div class="container">
+            <span class="breaking-label">BREAKING NEWS</span>
+            <div class="breaking-content" id="breakingNews"></div>
+        </div>
+    </div>
 
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Featured Section -->
+            <section class="featured-section" id="featuredSection">
+                <h2 class="section-title">Featured Story</h2>
+                <div id="featuredArticle" class="featured-article"></div>
+            </section>
+
+            <!-- Latest News -->
+            <section class="latest-news">
+                <div class="section-header">
+                    <h2 class="section-title" id="categoryTitle">Latest News</h2>
+                    <div class="view-options">
+                        <button class="view-btn active" onclick="setView('grid')" data-view="grid" title="Grid view">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+                                <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+                                <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+                                <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+                            </svg>
+                        </button>
+                        <button class="view-btn" onclick="setView('list')" data-view="list" title="List view">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <line x1="8" y1="6" x2="21" y2="6" stroke="currentColor" stroke-width="2"></line>
+                                <line x1="8" y1="12" x2="21" y2="12" stroke="currentColor" stroke-width="2"></line>
+                                <line x1="8" y1="18" x2="21" y2="18" stroke="currentColor" stroke-width="2"></line>
+                                <line x1="3" y1="6" x2="3.01" y2="6" stroke="currentColor" stroke-width="2"></line>
+                                <line x1="3" y1="12" x2="3.01" y2="12" stroke="currentColor" stroke-width="2"></line>
+                                <line x1="3" y1="18" x2="3.01" y2="18" stroke="currentColor" stroke-width="2"></line>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div id="newsGrid" class="news-grid"></div>
+                <div id="loadingSpinner" class="loading-spinner">
+                    <div class="spinner"></div>
+                    <p>Loading news...</p>
+                </div>
+            </section>
+
+            <!-- Trending Sidebar -->
+            <aside class="trending-sidebar">
+                <h3 class="sidebar-title">Trending Now</h3>
+                <div id="trendingList" class="trending-list"></div>
+            </aside>
         </div>
     </main>
 
-    <template id="template-news-card">
-        <div class="card">
-            <div class="card-header">
-                <img src="https://via.placeholder.com/400x200" alt="News Image" id="news-img">
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Global News Hub</h3>
+                    <p>Delivering trusted news from around the world since 2026.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Categories</h4>
+                    <ul>
+                        <li><a href="#" onclick="loadCategory('world')">World</a></li>
+                        <li><a href="#" onclick="loadCategory('technology')">Technology</a></li>
+                        <li><a href="#" onclick="loadCategory('business')">Business</a></li>
+                        <li><a href="#" onclick="loadCategory('sports')">Sports</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link">Twitter</a>
+                        <a href="#" class="social-link">Facebook</a>
+                        <a href="#" class="social-link">Instagram</a>
+                        <a href="#" class="social-link">LinkedIn</a>
+                    </div>
+                </div>
             </div>
-            <div class="card-content">
-                <h3 id="news-title">This is the title</h3>
-                <h6 class="news-source" id="news-source">End Gadget 27/06/2024</h6>
-                <p class="news-desc" id="news-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et sint in atque necessitatibus illum modi rerum, assumenda ipsum maiores laborum?</p>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Global News Hub. All rights reserved.</p>
             </div>
         </div>
-    </template>
+    </footer>
+
     <script src="script.js"></script>
 </body>
 
