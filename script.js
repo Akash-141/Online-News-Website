@@ -271,6 +271,7 @@ const newsDatabase = {
     ]
 };
 
+
 // Global variables
 let currentCategory = 'world';
 let currentView = 'grid';
