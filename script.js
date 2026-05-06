@@ -364,6 +364,7 @@ function displayFeatured(category) {
     document.getElementById('featuredArticle').innerHTML = featuredHTML;
 }
 
+
 // Display news grid
 function displayNews(category) {
     const articles = newsDatabase[category] || newsDatabase.world;
