@@ -1,3 +1,5 @@
+
+
 // Professional News Portal - Clean and Error-Free Code
 
 // News Database
